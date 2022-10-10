@@ -10,17 +10,20 @@ function App() {
             {
                 name: 'D3',
                 quadrant: 'tools',
-                ring: "assess"
+                ring: "assess",
+                link: "https://d3js.org/"
             },
             {
                 name: 'TypeScript',
                 quadrant: 'languages',
-                ring: "trial"
+                ring: "trial",
+                link: "https://www.typescriptlang.org/"
             },
             {
                 name: 'Storybook',
                 quadrant: 'tools',
-                ring: "adopt"
+                ring: "adopt",
+                link: "https://storybook.js.org/"
             }
         ]
     };

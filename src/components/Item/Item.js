@@ -38,6 +38,7 @@ function Item(props) {
             }}
         >
             <circle r={"4px"}/>
+            <a href={props.data.link} target="_blank">
             <text
                 className={"name"}
                 dx={"7px"}
@@ -47,6 +48,7 @@ function Item(props) {
             >
                 {isHovered ? props.data.name : shortName}
             </text>
+            </a>
         </ItemWrapper>
     )
 }

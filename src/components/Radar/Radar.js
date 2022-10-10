@@ -90,7 +90,8 @@ function Radar(props) {
                 name: entry.name,
                 quadrant: entry.quadrant,
                 x: coordinates.x,
-                y: coordinates.y
+                y: coordinates.y,
+                link: entry.link
             };
 
             results.push(blip);

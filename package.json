@@ -1,11 +1,11 @@
 {
-  "name": "react-tech-radar",
+  "name": "seb-cook-flyer-marketing-react-tech-radar",
   "description": "A React Component for Tech Radar inspired by ThoughtWorks' technology decision sharing project",
   "version": "0.1.28",
-  "author": "Omer Gurarslan <omerg@lucidcode.com.tr> (https://omerg.info)",
+  "author": "Sebastian Cook",
   "repository": {
     "type": "git",
-    "url": "https://github.com/omerg/react-tech-radar.git"
+    "url": "https://github.com/seb-cook-flyer-marketing/seb-cook-flyer-marketing-react-tech-radar.git"
   },
   "keywords": [
     "d3",
