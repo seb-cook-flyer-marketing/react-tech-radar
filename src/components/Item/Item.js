@@ -38,7 +38,7 @@ function Item(props) {
             }}
         >
             <circle r={"4px"}/>
-            <a href={props.data.link} target="_blank">
+            <a href={props.data.link} target="_blank" rel="noopener noreferrer">
             <text
                 className={"name"}
                 dx={"7px"}
