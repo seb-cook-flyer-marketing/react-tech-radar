@@ -33,16 +33,16 @@
   },
   "dependencies": {
     "d3-color": "^3.1.0",
-    "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
     "d3-shape": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=production && rm -rf dist && mkdir dist && babel src/components --out-dir dist --copy-files",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
@@ -64,6 +64,10 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.1.2",
+    "@types/node": "^18.8.4",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -78,9 +82,14 @@
     "@storybook/core": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "@storybook/theming": "latest",
-    "prop-types": "^15.7.2",
+    "@types/d3-color": "^3.1.0",
+    "@types/d3-scale": "^4.0.2",
+    "@types/d3-scale-chromatic": "^3.0.0",
+    "@types/d3-shape": "^3.1.0",
+    "@types/styled-components": "^5.1.26",
+    "d3-scale": "^4.0.2",
     "react-scripts": "3.0.1",
     "storybook": "^6.5.12",
-    "tabletop": "^1.5.2"
+    "tabletop": "^1.6.3"
   }
 }

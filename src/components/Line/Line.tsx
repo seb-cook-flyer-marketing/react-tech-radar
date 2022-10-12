@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from "prop-types";
-
-function Line(props) {
+function Line(props: LineProps) {
 
     return (
         <line
@@ -14,10 +12,10 @@ function Line(props) {
     )
 }
 
-Line.propTypes = {
-    x2: PropTypes.number.isRequired,
-    y2: PropTypes.number.isRequired,
-    stroke: PropTypes.string.isRequired
-};
+interface LineProps {
+    x2: number;
+    y2: number;
+    stroke: string;
+}
 
 export default Line;

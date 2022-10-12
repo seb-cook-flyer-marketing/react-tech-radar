@@ -1,11 +1,10 @@
 import React, {useState, useContext, useRef} from 'react';
 import {ItemWrapper} from "./Item.style";
 import {ThemeContext} from "../theme-context";
-import PropTypes from "prop-types";
 
 const MAX_LENGTH = 15;
 
-function Item(props) {
+function Item(props: ItemProps) {
 
     //create ref
     let ref = useRef(null);
@@ -53,9 +52,15 @@ function Item(props) {
     )
 }
 
-Item.propTypes = {
-    rotateDegrees: PropTypes.number.isRequired,
-    data: PropTypes.object.isRequired
-};
+interface ItemProps {
+    rotateDegrees: number;
+    data: {
+        name: string;
+        link: string;
+        id: string;
+        x: number;
+        y: number;
+    }
+}
 
 export default Item;

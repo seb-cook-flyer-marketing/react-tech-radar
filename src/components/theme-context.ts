@@ -19,13 +19,13 @@ const DEFAULT_FONT_SIZE = 12;
 const DEFAULT_COLOR_SCALE = getColorScale(5);
 const DEFAULT_FONT_FAMILY = "Arial, Helvetica, sans-serif";
 
-export function getColorScale(colorScaleIndex) {
+export function getColorScale(colorScaleIndex: number) {
 
     if (colorScaleIndex < 0 || colorScaleIndex >= colorScales.length) {
         console.warn("Unsupported color scheme. Please choose between 0 and " + (colorScales.length - 1));
         return DEFAULT_COLOR_SCHEME_INDEX;
     }
-
+    // @ts-ignore
     return scaleOrdinal(d3Scales[colorScales[colorScaleIndex].name]);
 }
 
@@ -34,5 +34,13 @@ export const ThemeContext = React.createContext({
     fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: DEFAULT_FONT_SIZE,
     itemFontSize: DEFAULT_FONT_SIZE,
-    quadrantsConfig : {}
-});
+    quadrantsConfig: {}
+} as ThemeContextProps);
+
+interface ThemeContextProps {
+    colorScale: any;
+    fontFamily: string
+    fontSize: number
+    itemFontSize: number
+    quadrantsConfig: any
+}

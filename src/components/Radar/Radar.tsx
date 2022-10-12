@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {RadarContents} from "./Radar.style";
-import PropTypes from 'prop-types';
 
 import Quadrant from "../Quadrant/Quadrant";
 import {getColorScale, ThemeContext} from "../theme-context";
@@ -23,7 +22,7 @@ const RADIUS_DIMINISH_CONSTANT = 1.5;
 //extend width to right so that overflow text would be visible
 const RIGHT_EXTENSION = 1.1;
 
-function Radar(props) {
+function Radar(props:RadarProps) {
 
     //manage optional variables
     const width = props.width || DEFAULT_WIDTH;
@@ -53,7 +52,7 @@ function Radar(props) {
 
     //given the ring and quadrant of a value,
     //calculates x and y coordinates
-    const processRadarData = (quadrants, rings, data) => {
+    const processRadarData = (quadrants: any[], rings: any[], data: any[]) => {
 
         //order by rings. this will result in better collision
         //detection performance since it is harder to relocate
@@ -104,15 +103,15 @@ function Radar(props) {
 
     //used by processRadarData.
     //generates random coordinates within given range
-    const getRandomCoordinates = (rings, entry, angle, quadrant_delta, results, collisionCount = 0) => {
+    const getRandomCoordinates = (rings: any[], entry: any, angle: number, quadrant_delta: number, results: any, collisionCount = 0): any => {
 
-        const polarToCartesian = (r, t) => {
+        const polarToCartesian = (r: number, t: number) => {
             const x = r * Math.cos(t);
             const y = r * Math.sin(t);
             return {x: x, y: y};
         };
 
-        const getPositionByQuadrant = (radiusArray) => {
+        const getPositionByQuadrant = (radiusArray: number[]) => {
             const ringCount = rings.length;
             const margin = 0.2;
             const ringIndex = rings.indexOf(entry.ring);
@@ -121,7 +120,7 @@ function Radar(props) {
             return posStart + posLength;
         };
 
-        const calculateRadiusDiminish = (nrOfRings) => {
+        const calculateRadiusDiminish = (nrOfRings: number) => {
 
             let max = 1;
 
@@ -154,7 +153,7 @@ function Radar(props) {
             return arr;
         };
 
-        const hasCollision = (results, coordinates) => {
+        const hasCollision = (results: any, coordinates: {x: number, y: number}) => {
 
             if (collisionCount >= MAX_COLLISION_RETRY_COUNT) {
                 return false;
@@ -173,7 +172,7 @@ function Radar(props) {
             return false;
         };
 
-        const radiusArray = calculateRadiusDiminish(props.rings.length);
+        const radiusArray = calculateRadiusDiminish(props.rings!.length);
 
         const randomPosition = getPositionByQuadrant(radiusArray);
         const positionAngle = Math.random();
@@ -183,7 +182,7 @@ function Radar(props) {
         const theta = (positionAngle * angle) + quadrant_delta;
         const r = randomPosition * ringWidth;
 
-        const data = polarToCartesian(r, theta);
+        const data = {...polarToCartesian(r, theta), collisionCount: collisionCount};
 
         //recalculate if there is a collision
         const collision = hasCollision(results, data);
@@ -230,6 +229,7 @@ function Radar(props) {
                                     angle={angle}
                                     name={value}
                                     radiusDiminish={radiusDiminishConstant}
+                                    fontSize={props.fontSize || fontSize}
                                 />
                             </g>)
                     })}
@@ -240,15 +240,18 @@ function Radar(props) {
 
 }
 
-Radar.propTypes = {
-    quadrants: PropTypes.array.isRequired,
-    rings: PropTypes.array,
-    data: PropTypes.array,
-    width: PropTypes.number,
-    fontSize: PropTypes.number,
-    itemFontSize: PropTypes.number,
-    colorScaleIndex: PropTypes.number,
-    radiusDiminish: PropTypes.number
-};
+interface RadarProps {
+    quadrants: string[];
+    rings?: string[];
+    data?: any[];
+    width?: number;
+    margin?: number;
+    fontSize?: number;
+    fontFamily?: string;
+    quadrantsConfig?: {};
+    itemFontSize?: number;
+    colorScaleIndex?: number;
+    radiusDiminish?: number;
+}
 
 export default Radar;

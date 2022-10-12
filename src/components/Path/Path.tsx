@@ -1,18 +1,17 @@
 import React, {useContext} from 'react';
 import {rgb as d3rgb } from 'd3-color';
-import {arc as d3arc } from 'd3-shape';
+import {  arc as d3arc } from 'd3-shape';
 import {ThemeContext} from "../theme-context";
-import PropTypes from "prop-types";
 
-function Path(props) {
+function Path(props: PathProps) {
 
     //context variables
     const {fontSize, fontFamily, colorScale} = useContext(ThemeContext);
 
     const rgb = d3rgb(colorScale(props.quadIndex));
-    const fill = rgb.brighter(props.ringIndex / props.ringsLength * 0.9);
+    const fill = rgb.brighter(props.ringIndex / props.ringsLength * 0.9).toString();
     const uniquePathId = props.quadIndex + "-" + props.ringIndex;
-
+/*
     const archFunction = () => {
         return d3arc()
             .outerRadius(() => {
@@ -27,12 +26,23 @@ function Path(props) {
             .endAngle(() => {
                 return props.quad_angle + Math.PI / 2;
             });
-    };
+    };*/
+
+    const arc = d3arc()
+
+    const arcOutPut = arc({
+        outerRadius: props.outerRadius * props.ringWidth,
+        innerRadius: props.innerRadius * props.ringWidth,
+        startAngle: Math.PI / 2,
+        endAngle: props.quad_angle + Math.PI / 2
+    }) as string | undefined;
+
+
 
     return (
         <g>
             <path id={uniquePathId} className={"quadrant"}
-                  d={archFunction()()}
+                  d={arcOutPut}
                   fill={fill}
             >
             </path>
@@ -52,15 +62,17 @@ function Path(props) {
     )
 }
 
-Path.propTypes = {
-    quadIndex: PropTypes.number.isRequired,
-    ringIndex: PropTypes.number.isRequired,
-    ringWidth: PropTypes.number.isRequired,
-    ringsLength: PropTypes.number.isRequired,
-    quad_angle: PropTypes.number.isRequired,
-    outerRadius: PropTypes.number.isRequired,
-    innerRadius: PropTypes.number.isRequired,
-    title: PropTypes.string
-};
+interface PathProps {
+    quadIndex: number;
+    ringIndex: number;
+    ringWidth: number;
+    ringsLength: number;
+    quad_angle: number;
+    outerRadius: number;
+    innerRadius: number;
+    title: string;
+}
+
+ 
 
 export default Path;

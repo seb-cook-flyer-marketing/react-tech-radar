@@ -2,7 +2,14 @@ import React, {useContext} from 'react';
 import TextWrapper from "./Text.style";
 import {ThemeContext} from "../theme-context";
 
-function Text(props) {
+interface TextProps {
+    name: string;
+    dx: number;
+    dy: number;
+    fontSize: number;
+    fontFamily: string;
+}
+function Text(props: TextProps) {
 
     //context variables
     const {fontSize, fontFamily} = useContext(ThemeContext);

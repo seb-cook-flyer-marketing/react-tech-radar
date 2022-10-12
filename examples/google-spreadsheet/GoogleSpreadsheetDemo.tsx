@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-
+//@ts-ignore
 import * as Tabletop from "tabletop";
 import Radar from "../../src/components/Radar/Radar";
 
 //Data fetched from tabletop is cached for this number of seconds.
 const CACHE_TTL = 10;
 
-const GOOGLE_SPREADSHEET_LINK = "https://docs.google.com/spreadsheets/d/1XkfUX8auztSkMoHwBEraDjHZgx7NEH59OyUZH-0IQGw/edit";
+const GOOGLE_SPREADSHEET_LINK = "https://docs.google.com/spreadsheets/d/18CzhKxsOMP25AO-DTcz1QbidTeJm42gCZYL9WpP5qrQ/edit?usp=sharing";
 
 function GoogleSpreadSheetDemo() {
 
@@ -24,9 +24,9 @@ function GoogleSpreadSheetDemo() {
     //when component is mounted.
     useEffect(() => {
 
-        const getDataFromCache = (cacheKey) => {
+        const getDataFromCache = (cacheKey:string) => {
 
-            const scheduleInvalidate = (timeToLive) => {
+            const scheduleInvalidate = (timeToLive:number) => {
 
                 const radarCache = setTimeout(() => {
                     console.log("Radar cache invalidated: " + radarCache);
@@ -40,7 +40,7 @@ function GoogleSpreadSheetDemo() {
             const getFromTableTop = () => {
                 Tabletop.init({
                     key: cacheKey,
-                    callback: (data) => {
+                    callback: (data: any) => {
 
                         //update state
                         setData(data);

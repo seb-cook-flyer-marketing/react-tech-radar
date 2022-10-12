@@ -5,17 +5,16 @@ import Line from "../Line/Line";
 import Item from "../Item/Item";
 import {QuadrantWrapper} from "./Quadrant.style";
 import {ThemeContext} from "../theme-context";
-import PropTypes from "prop-types";
 
-function Quadrant(props) {
+function Quadrant(props: QuadranProps) {
 
     //context variables
-    const {fontSize, fontFamily, colorScale, quadrantsConfig :{ textMargin, textYOffset, showOnlyFirstQuadrantLabels }} = useContext(ThemeContext);
+    const {fontSize, fontFamily, colorScale, quadrantsConfig: { textMargin, textYOffset, showOnlyFirstQuadrantLabels }} = useContext(ThemeContext);
 
     //optional variables
     const radiusDiminishConstant = props.radiusDiminish;
 
-    let ref = React.createRef();
+    let ref = React.createRef() as any;
     const ringWidth = props.width / 2;
     const radialAngle = 2 * Math.PI / 360 * props.angle;
 
@@ -34,7 +33,7 @@ function Quadrant(props) {
         //     .style("transform", "translate(-300px, -300px) scale(" + 2 + ") ")
     };
 
-    const calculateRadiusDiminish = (nrOfRings) => {
+    const calculateRadiusDiminish = (nrOfRings: number) => {
 
         let max = 1;
 
@@ -42,7 +41,7 @@ function Quadrant(props) {
         //the share of total radius among rings.
         let arr = [1];
         for (let i = 1; i < nrOfRings; i++) {
-            max = max * radiusDiminishConstant;
+            max = max * radiusDiminishConstant!;
             arr.push(max);
         }
 
@@ -86,7 +85,7 @@ function Quadrant(props) {
 
             {props.rings.map((ringValue, ringIndex) => {
                 const ringsLength = props.rings.length;
-                const title = ringIndex === props.rings.length - 1 ? props.name : null;
+                const title = ringIndex === props.rings.length - 1 ? props.name : "";
 
                 const leftMargin = textMargin ?? (40 * (radiuses[ringIndex + 1] - radiuses[ringIndex]));
                 const showLabel = showOnlyFirstQuadrantLabels? props.index === 0 : true;
@@ -126,16 +125,17 @@ function Quadrant(props) {
     )
 }
 
-Quadrant.propTypes = {
-    transform: PropTypes.string.isRequired,
-    rotateDegrees: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-    index: PropTypes.number.isRequired,
-    rings: PropTypes.array.isRequired,
-    points: PropTypes.array.isRequired,
-    angle: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    radiusDiminish: PropTypes.number
-};
+interface QuadranProps {
+    transform: string;
+    rotateDegrees: number;
+    width: number;
+    index: number;
+    rings: any[];
+    fontSize: number;
+    points: any[];
+    angle: number;
+    name: string;
+    radiusDiminish?: number;
+}
 
 export default Quadrant;
